@@ -11,24 +11,36 @@ import androidx.core.view.WindowInsetsCompat;
 
 import soares.guilherme.lista.R;
 
-public class    NewItemActivity extends AppCompatActivity {
+public class NewItemActivity extends AppCompatActivity {
 
-    static int PHOTO_PICKER_REQUEST = 1;
-    Uri photoSelected = null;
+    static int PHOTO_PICKER_REQUEST = 1; 
+    Uri photoSelected = null; // declarando a variável que armazenará a imagem selecionada
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
         setContentView(R.layout.activity_new_item); //setando a interface pro usuário
 
-        ImageButton imbCl = findViewById(R.id.imbCl);
+        ImageButton imbCl = findViewById(R.id.imbCl); // capturando o botão de imagem
+        imbCl.setOnClickListener(new View.OnClickListener(){ // criando um listener para o botão
+            @Override
+            public void onClick(View v){ // método que será chamado quando o botão for clicado
+                Intent photoPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT); // criando um intent para abrir a galeria
+                photoPickerIntent.setType("image/*"); // definindo o tipo de arquivo que será aberto
+                startActivityForResult(photoPickerIntent, PHOTO_PICKER_REQUEST); // iniciando a activity de seleção de imagem
+            }
+        });
+    }
 
-        //EdgeToEdge.enable(this);
-        //setContentView(R.layout.activity_new_item);
-        //ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-        //    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-        //    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-        //    return insets;
-        //});
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { // método que será chamado quando a activity de seleção de imagem for finalizada
+        super.onActivityResult(requestCode, resultCode, data); // chamando o método da superclasse
+            if(requestCode == PHOTO_PICKER_REQUEST) { 
+                if(resultCode == Activity.RESULT_OK) { // verificando se a activity que foi finalizada é a de seleção de imagem e se foi bem sucedida
+                    photoSelected = data.getData(); // armazenando a imagem selecionada
+                    ImageView imvfotoPreview = findViewById(R.id.imvfotoPreview); // capturando a ImageView que exibirá a imagem selecionada
+                    imvfotoPreview.setImageURI(photoSelected); // exibindo a imagem selecionada pro usuário
+            }
+        }
     }
 }
