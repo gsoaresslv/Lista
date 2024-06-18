@@ -32,39 +32,35 @@ public class NewItemActivity extends AppCompatActivity {
         });
         Button btnAddItem = findViewById(R.id.btnAddItem);
         btnAddItem.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        7. if (photoSelected == null) {
-        8. Toast.makeText(NewItemActivity.this, "É necessário
-        selecionar uma imagem!", Toast.LENGTH_LONG).show();
-        9. return;
-        10. }
-        11.
-        12. EditText etTitle = findViewById(R.id.etTitle);
-        13. String title = etTitle.getText().toString();
-        14. if (title.isEmpty()) {
-        15. Toast.makeText(NewItemActivity.this, "É necessário inserir
-        um título", Toast.LENGTH_LONG).show();
-        16. return;
-        17. }
-        18.
-        19. EditText etDesc = findViewById(R.id.etDesc);
-        20. String description = etDesc.getText().toString();
-        21. if (desc.isEmpty()) {
-        22. Toast.makeText(NewItemActivity.this, "É necessário inserir
-        uma descrição", Toast.LENGTH_LONG).show();
-        23. return;
-        24. }
-        25.
-        26. Intent i = new Intent();
-        27. i.setData(photoSelected);
-        28. i.putExtra("title", title);
-        29. i.putExtra("description", description);
-        30. setResult(Activity.RESULT_OK, i);
-        31. finish();
-        32. }
-        33.});
-    }
+            @Override
+            public void onClick(View v) {
+                if (photoSelected == null) {
+                    Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show();
+                    return;
+                } 
+                EditText etTitle = findViewById(R.id.etTitle);
+                String title = etTitle.getText().toString();
+            
+                if (title.isEmpty()) {
+                    Toast.makeText(NewItemActivity.this, "É necessário inserir um título", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            
+                EditText etDesc = findViewById(R.id.etDesc);
+                String description = etDesc.getText().toString();
+                if (desc.isEmpty()) {
+                    Toast.makeText(NewItemActivity.this, "É necessário inserir uma descrição", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Intent i = new Intent();
+                i.setData(photoSelected);
+                i.putExtra("title", title);
+                i.putExtra("description", description);
+                setResult(Activity.RESULT_OK, i);
+                finish();
+            }
+        });
+        }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { // método que será chamado quando a activity de seleção de imagem for finalizada
