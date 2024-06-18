@@ -30,6 +30,40 @@ public class NewItemActivity extends AppCompatActivity {
                 startActivityForResult(photoPickerIntent, PHOTO_PICKER_REQUEST); // iniciando a activity de seleção de imagem
             }
         });
+        Button btnAddItem = findViewById(R.id.btnAddItem);
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        7. if (photoSelected == null) {
+        8. Toast.makeText(NewItemActivity.this, "É necessário
+        selecionar uma imagem!", Toast.LENGTH_LONG).show();
+        9. return;
+        10. }
+        11.
+        12. EditText etTitle = findViewById(R.id.etTitle);
+        13. String title = etTitle.getText().toString();
+        14. if (title.isEmpty()) {
+        15. Toast.makeText(NewItemActivity.this, "É necessário inserir
+        um título", Toast.LENGTH_LONG).show();
+        16. return;
+        17. }
+        18.
+        19. EditText etDesc = findViewById(R.id.etDesc);
+        20. String description = etDesc.getText().toString();
+        21. if (desc.isEmpty()) {
+        22. Toast.makeText(NewItemActivity.this, "É necessário inserir
+        uma descrição", Toast.LENGTH_LONG).show();
+        23. return;
+        24. }
+        25.
+        26. Intent i = new Intent();
+        27. i.setData(photoSelected);
+        28. i.putExtra("title", title);
+        29. i.putExtra("description", description);
+        30. setResult(Activity.RESULT_OK, i);
+        31. finish();
+        32. }
+        33.});
     }
 
     @Override
