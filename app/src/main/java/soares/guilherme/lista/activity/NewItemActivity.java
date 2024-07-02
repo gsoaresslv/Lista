@@ -86,8 +86,8 @@ public class NewItemActivity extends AppCompatActivity {
             if(requestCode == PHOTO_PICKER_REQUEST) { 
                 if(resultCode == Activity.RESULT_OK) { // verificando se a activity que foi finalizada é a de seleção de imagem e se foi bem sucedida
                     photoSelected = data.getData(); // armazenando a imagem selecionada
-                    ImageView imvfotoPreview = findViewById(R.id.imvPhotoPreview); // capturando a ImageView que exibirá a imagem selecionada
-                    imvfotoPreview.setImageURI(photoSelected); // exibindo a imagem selecionada pro usuário
+                    ImageView imvPhotoPreview = findViewById(R.id.imvPhotoPreview); // capturando a ImageView que exibirá a imagem selecionada
+                    imvPhotoPreview.setImageURI(photoSelected); // exibindo a imagem selecionada pro usuário
             }
         }
     }
